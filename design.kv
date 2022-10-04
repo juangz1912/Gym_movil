@@ -1,0 +1,550 @@
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+
+<ElementCard@MDCard>:
+    radius: '10dp'
+    spacing: '10dp'
+    padding: '10dp'
+    image: ''
+    orientation: 'vertical'
+    ripple_behavior: True
+    on_release:
+        app.root.transition = RiseInTransition()
+    Image:
+        source: root.image
+
+<CustomizeScreen@MDBoxLayout>:
+    orientation: 'vertical'
+    text: ''
+    padding: 100
+    MDLabel:
+        text: root.text
+        align: 'center'
+        pos_hint: {'center_x':0.5}
+    MDFillRoundFlatButton:
+        text: 'REGRESAR'
+        pos_hint: {'center_x':0.5}
+        on_release:
+            app.root.current = 'screen_principal'
+            app.root.transition = SlideTransition(direction= 'left')
+
+
+<ui>:
+    MDScreen:
+        name: 'login'
+        md_bg_color: 0,0,0,0
+        MDCard:
+            size_hint: None, None
+            size: 800, 900
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            elevation: 10
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+
+            MDLabel:
+                id: bienvenido_label
+                text: 'Bienvenido'
+                font_size: 40
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: 15
+
+            MDTextField:
+                id: user
+                hint_text: 'Correo'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                id: password
+                hint_text: 'Contraseña'
+                icon_right: 'eye-off'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+                password: True
+            MDBoxLayout:
+                size_hint: 1, 0
+                spacing: '10dp'
+                orientation: 'horizontal'
+                pos_hint: {'center_x':0.7}
+                MDRoundFlatButton:
+                    text: 'Ingresar'
+                    font_size: 30
+                    pos_hint: {'center_x':0.5}
+                    on_press:
+                        root.current = 'screen_principal'
+
+                MDRoundFlatButton:
+                    text: 'Crear cuenta'
+                    font_size: 30
+                    pos_hint: {'center_x':0.5}
+                    on_press:
+                        root.current = 'crear_cuenta'
+
+            MDRoundFlatButton:
+                text: 'Recuperar contraseña'
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+                on_press:
+                    root.current = 'recuperar_contrasena'
+
+            MDBoxLayout:
+                size_hint: 1, 0
+
+
+
+    MDScreen:
+        name: 'screen_principal'
+        md_bg_color: 0,0,0,0
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                size_hint: 1, 0.3
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+                    on_release:
+                        root.current = 'screen_res1'
+
+                    MDLabel:
+                        text: 'Reserva 1'
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.3
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+                    on_release:
+                        root.current = 'screen_res2'
+
+                    MDLabel:
+                        text: 'Reserva 2'
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+            MDGridLayout:
+                cols: 4
+                size_hint: 1, .2
+                padding: ['10dp','10dp','10dp','10dp']
+                spacing: '10dp'
+
+                ElementCard:
+                    image: 'images/msg.png'
+                    on_release:
+                        root.current = 'screen_msg'
+
+                ElementCard:
+                    image: 'images/not.png'
+                    on_release:
+                        root.current = 'screen_not'
+
+                ElementCard:
+                    image: 'images/cal.png'
+                    on_release:
+                        root.current = 'screen_principal'
+
+                ElementCard:
+                    image: 'images/per.png'
+                    on_release:
+                        root.current = 'screen_per'
+
+    MDScreen:
+        name:'recuperar_contrasena'
+        md_bg_color: 0,0,0,0
+        MDCard:
+            size_hint: None, None
+            size: 800, 900
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            elevation: 10
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+
+            MDLabel:
+                text: 'Recuperar contraseña'
+                font_size: 40
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: 15
+
+            MDTextField:
+                hint_text: 'Correo'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Cedula'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Nueva contraseña'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Confirmar contraseña'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDRoundFlatButton:
+                text: 'Aceptar'
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+                on_press:
+                    root.current = 'screen_principal'
+
+    MDScreen:
+        name:'crear_cuenta'
+        md_bg_color: 0,0,0,0
+        MDCard:
+            size_hint: None, None
+            size: 800, 900
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            elevation: 10
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+
+            MDLabel:
+                text: 'Crear una cuenta'
+                font_size: 40
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: 15
+
+            MDTextField:
+                hint_text: 'Nombre'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Cedula'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Correo'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Contraseña'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDTextField:
+                hint_text: 'Confirmar contraseña'
+                icon_right: 'account'
+                size_hint_x: None
+                width: 600
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+
+            MDRoundFlatButton:
+                CustomDropDown:
+                    width: 100
+                    font_size: 30
+                    size_hint: 0.5, 0.5
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+
+            MDRoundFlatButton:
+                text: 'Aceptar'
+                font_size: 30
+                pos_hint: {'center_x':0.5}
+                on_press:
+                    root.current = 'screen_principal'
+
+    MDScreen:
+        name:'screen_msg'
+        CustomizeScreen:
+            text: 'Comentarios'
+
+    MDScreen:
+        name:'screen_not'
+        CustomizeScreen:
+            text: 'Noticias'
+
+    MDScreen:
+        name:'screen_res'
+        CustomizeScreen:
+            text: 'Reservas'
+
+    MDScreen:
+        name:'screen_per'
+        CustomizeScreen:
+            text: 'Perfil'
+
+    MDScreen:
+        name: 'normas'
+        CustomizeScreen:
+            text: 'normas'
+            spacing: '10dp'
+            MDFillRoundFlatButton:
+                text: 'ACEPTAR'
+                pos_hint: {'center_x':0.5}
+                on_release:
+                    app.root.current = 'screen_principal'
+
+
+    MDScreen:
+        name:'screen_res1'
+        md_bg_color: 0,0,0,0
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+                    on_release:
+                        root.current = 'normas'
+
+                    MDLabel:
+                        text: '6:00AM - 8:00AM '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+                    on_release:
+                        root.current = 'normas'
+
+                    MDLabel:
+                        text: '8:00AM - 10:00AM '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+                    on_release:
+                        root.current = 'normas'
+
+                    MDLabel:
+                        text: '10:00AM - 12:00pm '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+                    on_release:
+                        root.current = 'normas'
+
+                    MDLabel:
+                        text: '12:00PM - 2:00PM '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDGridLayout:
+                cols: 4
+                size_hint: 1, .2
+                padding: ['10dp','10dp','10dp','10dp']
+                spacing: '10dp'
+
+                ElementCard:
+                    image: 'images/msg.png'
+                    on_release:
+                        root.current = 'screen_msg'
+
+                ElementCard:
+                    image: 'images/not.png'
+                    on_release:
+                        root.current = 'screen_not'
+
+                ElementCard:
+                    image: 'images/cal.png'
+                    on_release:
+                        root.current = 'screen_principal'
+
+                ElementCard:
+                    image: 'images/per.png'
+                    on_release:
+                        root.current = 'screen_per'
+
+    MDScreen:
+        name:'screen_res2'
+        md_bg_color: 0,0,0,0
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+
+                    MDLabel:
+                        text: '6:00AM - 8:00AM '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+
+                    MDLabel:
+                        text: '8:00AM - 10:00AM '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+
+                    MDLabel:
+                        text: '10:00AM - 12:00pm '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: '30 cupos disponibles'
+                        pos_hint: {'center_y': 0.5}
+
+            MDBoxLayout:
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '10dp'
+                    line_color: 1,0,0,1
+
+                    MDLabel:
+                        text: '12:00PM - 2:00PM '
+                        align: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDLabel:
+                        text: 'RESERVADO'
+                        pos_hint: {'center_y': 0.5}
+
+                    Image:
+                        source: 'images/trash.png'
+                        pos_hint: {'center_y': 0.5}
+
+
+            MDGridLayout:
+                cols: 4
+                size_hint: 1, .2
+                padding: ['10dp','10dp','10dp','10dp']
+                spacing: '10dp'
+
+                ElementCard:
+                    image: 'images/msg.png'
+                    on_release:
+                        root.current = 'screen_msg'
+
+                ElementCard:
+                    image: 'images/not.png'
+                    on_release:
+                        root.current = 'screen_not'
+
+                ElementCard:
+                    image: 'images/cal.png'
+                    on_release:
+                        root.current = 'screen_principal'
+
+                ElementCard:
+                    image: 'images/per.png'
+                    on_release:
+                        root.current = 'screen_per'
